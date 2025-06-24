@@ -1,4 +1,4 @@
-name: Trigger Workflow
+name: Concurrency Workflow
 
 on:
   workflow_dispatch
