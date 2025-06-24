@@ -1,4 +1,4 @@
-name: Variables and Secrets
+name: Trigger Workflow
 
 on:
   schedule:
