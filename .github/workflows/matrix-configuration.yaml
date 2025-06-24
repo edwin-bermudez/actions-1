@@ -1,0 +1,12 @@
+name: Matrix Configuration
+
+on: 
+    push:
+    workflow_dispatch:
+
+jobs:
+    testing:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Test
+              run: echo "Hello World"
