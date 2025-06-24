@@ -1,0 +1,32 @@
+name: Trigger Workflow
+
+on:
+  workflow_dispatch
+  #schedule:
+  #  - cron: "*/1 * * * *"
+
+jobs:
+    docker-build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Docker Build
+              run: echo docker build -t ${{ vars.CONTAINER_REGISTRY }}/${{ vars.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+            
+            - name: Docker Login
+              run:  echo docker login --username=${{ vars.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
+            
+            - name: Docker Push
+              run: echo docker push ${{ vars.CONTAINER_REGISTRY }}/${{ vars.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+
+    docker-deploy:
+        needs: docker-build
+        concurrency:
+          group: production-deployment
+          cancel-in-progress: true
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy container
+              run: echo docker run -d -p 8080:80 ${{ vars.CONTAINER_REGISTRY }}/${{ vars.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+            
+            - name: Delay time
+              run: sleep 3s
