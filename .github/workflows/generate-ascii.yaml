@@ -15,7 +15,6 @@ jobs:
 
             - name: Execute shell script
               run: |
-                pwd 
-                ls -lsrt
+                cd .github/workflows
                 chmod +x ascii-script.sh
                 ./ascii-script.sh
