@@ -13,7 +13,12 @@ on:
         #    - feature/*
         #    - test/*
 
-    #pull_request:
+    pull_request:
+        types:
+            - opened
+            - closed
+        paths-ignore:
+            - README.md
 
 jobs:
     hello:
