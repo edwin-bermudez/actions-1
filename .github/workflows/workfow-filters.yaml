@@ -1,0 +1,22 @@
+name:  Workflow Filters and Activities
+
+on:
+    workflow_dispatch:
+    #schedule:
+    #    - cron: '*/30 * * * *'
+    push:
+        branches:
+            - main
+            - '!feature/*'
+        
+        #branches-ignore:
+        #    - feature/*
+        #    - test/*
+
+    #pull_request:
+
+jobs:
+    hello:
+        runs-on: ubuntu-latest
+        steps:
+        - run: echo this workflow/job/step is executed for event type - ${{ github.event_name }}
