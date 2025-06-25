@@ -3,3 +3,5 @@ Examples GitHub Actions
 
 # Actions
 - Checkout
+- Download
+- Upload
